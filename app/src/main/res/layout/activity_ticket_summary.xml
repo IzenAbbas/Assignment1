@@ -299,7 +299,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Smaks"
+            android:text="Snacks"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -361,7 +361,7 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
-            android.padding="12dp"/>
+            android:padding="12dp"/>
 
     </LinearLayout>
 </ScrollView>
