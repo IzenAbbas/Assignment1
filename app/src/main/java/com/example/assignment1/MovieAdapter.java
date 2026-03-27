@@ -1,5 +1,7 @@
 package com.example.assignment1;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +45,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                         .replace(R.id.fragment_container, fragment)
                         .addToBackStack(null)
                         .commit();
+            }
+        });
+        holder.btnTrailer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchQuery = movie.getTitle() + " official trailer";
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://www.youtube.com/results?search_query=" + Uri.encode(searchQuery)));
+                context.startActivity(intent);
             }
         });
     }

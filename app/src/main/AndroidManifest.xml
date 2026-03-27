@@ -27,23 +27,8 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
-            
-        <activity android:name=".HomeActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
-            
-        <activity android:name=".SeatSelectionActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
-            
-        <activity android:name=".SnacksActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
-            
-        <activity android:name=".TicketSummaryActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
 
 </manifest>

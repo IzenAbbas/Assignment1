@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="start|center_vertical"
+        android:gravity="center_vertical"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
         android:paddingTop="24dp"
@@ -25,12 +25,21 @@
             android:textStyle="bold" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="FAST"
             android:textColor="@color/white"
             android:textSize="28sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btnMenu"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@android:drawable/ic_menu_more"
+            android:contentDescription="Menu"
+            android:padding="4dp" />
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
