@@ -15,6 +15,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 public class SeatSelectionFragment extends Fragment {
     private static final String ARG_MOVIE_TITLE = "movie_title";
     private static final String ARG_MOVIE_GENRE = "movie_genre";
@@ -67,6 +71,8 @@ public class SeatSelectionFragment extends Fragment {
                 }
             });
         } else {
+            // Randomly assign booked and unavailable seats
+            randomlyAssignSeats(seatGridLeft, seatGridRight);
             setupSeatClicks(seatGridLeft);
             setupSeatClicks(seatGridRight);
             nowShowingButtons.setVisibility(View.VISIBLE);
@@ -102,6 +108,51 @@ public class SeatSelectionFragment extends Fragment {
             });
         }
     }
+    private void randomlyAssignSeats(LinearLayout seatGridLeft, LinearLayout seatGridRight) {
+        // Collect all seat ImageViews
+        List<ImageView> allSeats = new ArrayList<>();
+        collectSeats(seatGridLeft, allSeats);
+        collectSeats(seatGridRight, allSeats);
+        int totalSeats = allSeats.size();
+        int bookedCount = (int) (totalSeats * 0.20); // ~20% booked (green)
+        int unavailableCount = (int) (totalSeats * 0.10); // ~10% unavailable (red)
+        // Create a shuffled list of indices
+        List<Integer> indices = new ArrayList<>();
+        for (int i = 0; i < totalSeats; i++) {
+            indices.add(i);
+        }
+        Collections.shuffle(indices, new Random());
+        // Assign booked seats (green, non-clickable)
+        for (int i = 0; i < bookedCount && i < indices.size(); i++) {
+            ImageView seat = allSeats.get(indices.get(i));
+            seat.setImageResource(R.drawable.ic_seat_booked);
+            seat.setTag("booked");
+            seat.setEnabled(false);
+            seat.setClickable(false);
+        }
+        // Assign unavailable seats (red, non-clickable)
+        for (int i = bookedCount; i < bookedCount + unavailableCount && i < indices.size(); i++) {
+            ImageView seat = allSeats.get(indices.get(i));
+            seat.setImageResource(R.drawable.ic_seat_unavailable);
+            seat.setTag("unavailable");
+            seat.setEnabled(false);
+            seat.setClickable(false);
+        }
+    }
+    private void collectSeats(LinearLayout seatGrid, List<ImageView> seats) {
+        for (int i = 0; i < seatGrid.getChildCount(); i++) {
+            View row = seatGrid.getChildAt(i);
+            if (row instanceof LinearLayout) {
+                LinearLayout rowLayout = (LinearLayout) row;
+                for (int j = 0; j < rowLayout.getChildCount(); j++) {
+                    View seat = rowLayout.getChildAt(j);
+                    if (seat instanceof ImageView) {
+                        seats.add((ImageView) seat);
+                    }
+                }
+            }
+        }
+    }
     private void setupSeatClicks(LinearLayout seatGrid) {
         for (int i = 0; i < seatGrid.getChildCount(); i++) {
             View row = seatGrid.getChildAt(i);
@@ -110,16 +161,19 @@ public class SeatSelectionFragment extends Fragment {
                 for (int j = 0; j < rowLayout.getChildCount(); j++) {
                     View seat = rowLayout.getChildAt(j);
                     if (seat instanceof ImageView) {
-                        seat.setOnClickListener(new View.OnClickListener() {
+                        final ImageView seatView = (ImageView) seat;
+                        // Only set click listeners on available seats
+                        if (seatView.getTag() != null) continue; // Skip booked/unavailable
+                        seatView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 if (v.isSelected()) {
                                     v.setSelected(false);
-                                    v.setAlpha(1.0f);
+                                    seatView.setImageResource(R.drawable.ic_seat_available);
                                     selectedSeats--;
                                 } else {
                                     v.setSelected(true);
-                                    v.setAlpha(0.5f);
+                                    seatView.setImageResource(R.drawable.ic_seat_selected);
                                     selectedSeats++;
                                 }
                             }
@@ -137,8 +191,9 @@ public class SeatSelectionFragment extends Fragment {
                 for (int j = 0; j < rowLayout.getChildCount(); j++) {
                     View seat = rowLayout.getChildAt(j);
                     if (seat instanceof ImageView) {
+                        ImageView seatView = (ImageView) seat;
+                        seatView.setImageResource(R.drawable.ic_seat_booked);
                         seat.setEnabled(false);
-                        seat.setAlpha(0.3f);
                         seat.setClickable(false);
                     }
                 }

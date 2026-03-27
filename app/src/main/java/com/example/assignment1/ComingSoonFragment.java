@@ -24,9 +24,9 @@ public class ComingSoonFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerComingSoon);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         List<Movie> comingSoonMovies = new ArrayList<>();
-        comingSoonMovies.add(new Movie("The Batman", "Action", 176, R.drawable.the_dark_knight));
-        comingSoonMovies.add(new Movie("Dune: Part Two", "Sci-Fi", 166, R.drawable.intersteller));
-        comingSoonMovies.add(new Movie("Oppenheimer", "Drama", 180, R.drawable.inception));
+        comingSoonMovies.add(new Movie("The Batman", "Action", 176, R.drawable.the_batman));
+        comingSoonMovies.add(new Movie("Dune: Part Two", "Sci-Fi", 166, R.drawable.dune_part2));
+        comingSoonMovies.add(new Movie("Oppenheimer", "Drama", 180, R.drawable.open_heimer));
         MovieAdapter adapter = new MovieAdapter(getContext(), comingSoonMovies, true);
         recyclerView.setAdapter(adapter);
     }
