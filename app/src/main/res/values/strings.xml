@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">CineFAST</string>
+    <string name="onboarding_title">Explore now\nto experience the benefits</string>
+    <string name="onboarding_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore</string>
+    <string name="get_started">Get Started</string>
+    <string name="now_showing">Now Showing</string>
+    <string name="book_seats">Book Seats</string>
+    <string name="select_date">Select Date</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="booking_details">Booking Details</string>
+    <string name="send_ticket">Send Ticket</string>
+    <string name="proceed_snacks">Proceed to Snacks</string>
+    <string name="confirm_order">Confirm Order</string>
+    <string name="total">TOTAL</string>
+    <string name="available">Available</string>
+    <string name="selected">Selected</string>
+    <string name="booked">Booked</string>
+    <string name="tickets">Tickets</string>
+    <string name="snacks">Snacks</string>
+</resources>
