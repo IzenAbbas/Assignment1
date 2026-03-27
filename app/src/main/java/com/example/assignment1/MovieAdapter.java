@@ -1,21 +1,24 @@
 package com.example.assignment1;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
     private List<Movie> movieList;
     private Context context;
-    public MovieAdapter(Context context, List<Movie> movieList) {
+    private boolean isComingSoon;
+    public MovieAdapter(Context context, List<Movie> movieList, boolean isComingSoon) {
         this.context = context;
         this.movieList = movieList;
+        this.isComingSoon = isComingSoon;
     }
     @NonNull
     @Override
@@ -33,7 +36,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         holder.btnBookSeats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, SeatSelectionActivity.class));
+                SeatSelectionFragment fragment = SeatSelectionFragment.newInstance(
+                        movie.getTitle(), movie.getGenre(), isComingSoon);
+                FragmentManager fm = ((AppCompatActivity) context).getSupportFragmentManager();
+                fm.beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
     }
@@ -47,7 +56,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         TextView txtGenreDuration;
         AppCompatButton btnBookSeats;
         AppCompatButton btnTrailer;
-
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
             imgPoster = itemView.findViewById(R.id.imgPoster);

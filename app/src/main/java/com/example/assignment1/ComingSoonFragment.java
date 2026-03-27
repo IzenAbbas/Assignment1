@@ -27,7 +27,7 @@ public class ComingSoonFragment extends Fragment {
         comingSoonMovies.add(new Movie("The Batman", "Action", 176, R.drawable.the_dark_knight));
         comingSoonMovies.add(new Movie("Dune: Part Two", "Sci-Fi", 166, R.drawable.intersteller));
         comingSoonMovies.add(new Movie("Oppenheimer", "Drama", 180, R.drawable.inception));
-        MovieAdapter adapter = new MovieAdapter(getContext(), comingSoonMovies);
+        MovieAdapter adapter = new MovieAdapter(getContext(), comingSoonMovies, true);
         recyclerView.setAdapter(adapter);
     }
 }

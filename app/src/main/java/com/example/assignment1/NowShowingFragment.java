@@ -28,7 +28,7 @@ public class NowShowingFragment extends Fragment {
         nowShowingMovies.add(new Movie("Inception", "Sci-Fi", 148, R.drawable.inception));
         nowShowingMovies.add(new Movie("Interstellar", "Sci-Fi", 169, R.drawable.intersteller));
         nowShowingMovies.add(new Movie("The Shawshank Redemption", "Drama", 142, R.drawable.shawshank_redemption));
-        MovieAdapter adapter = new MovieAdapter(getContext(), nowShowingMovies);
+        MovieAdapter adapter = new MovieAdapter(getContext(), nowShowingMovies, false);
         recyclerView.setAdapter(adapter);
     }
 }
