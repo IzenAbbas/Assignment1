@@ -1,5 +1,7 @@
 package com.example.assignment1;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +19,8 @@ public class SeatSelectionFragment extends Fragment {
     private static final String ARG_MOVIE_TITLE = "movie_title";
     private static final String ARG_MOVIE_GENRE = "movie_genre";
     private static final String ARG_IS_COMING_SOON = "is_coming_soon";
+    private int selectedSeats = 0;
+    private static final double PRICE_PER_SEAT = 12.00;
     public static SeatSelectionFragment newInstance(String movieTitle, String movieGenre, boolean isComingSoon) {
         SeatSelectionFragment fragment = new SeatSelectionFragment();
         Bundle args = new Bundle();
@@ -63,6 +67,8 @@ public class SeatSelectionFragment extends Fragment {
                 }
             });
         } else {
+            setupSeatClicks(seatGridLeft);
+            setupSeatClicks(seatGridRight);
             nowShowingButtons.setVisibility(View.VISIBLE);
             comingSoonButtons.setVisibility(View.GONE);
             Button btnBookDirect = view.findViewById(R.id.btnBookDirect);
@@ -70,6 +76,9 @@ public class SeatSelectionFragment extends Fragment {
             btnBookDirect.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (selectedSeats == 0) selectedSeats = 2;
+                    double totalPrice = selectedSeats * PRICE_PER_SEAT;
+                    saveBooking(movieTitle, selectedSeats, totalPrice);
                     Toast.makeText(getContext(), "Booking Confirmed!", Toast.LENGTH_SHORT).show();
                     if (getActivity() != null) {
                         getActivity().getSupportFragmentManager().popBackStack();
@@ -79,9 +88,45 @@ public class SeatSelectionFragment extends Fragment {
             btnProceedSnacks.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(getContext(), SnacksActivity.class));
+                    if (selectedSeats == 0) selectedSeats = 2;
+                    double ticketPrice = selectedSeats * PRICE_PER_SEAT;
+                    SnacksFragment fragment = SnacksFragment.newInstance(movieTitle, selectedSeats, ticketPrice);
+                    if (getActivity() != null) {
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, fragment)
+                                .addToBackStack(null)
+                                .commit();
+                    }
                 }
             });
+        }
+    }
+    private void setupSeatClicks(LinearLayout seatGrid) {
+        for (int i = 0; i < seatGrid.getChildCount(); i++) {
+            View row = seatGrid.getChildAt(i);
+            if (row instanceof LinearLayout) {
+                LinearLayout rowLayout = (LinearLayout) row;
+                for (int j = 0; j < rowLayout.getChildCount(); j++) {
+                    View seat = rowLayout.getChildAt(j);
+                    if (seat instanceof ImageView) {
+                        seat.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (v.isSelected()) {
+                                    v.setSelected(false);
+                                    v.setAlpha(1.0f);
+                                    selectedSeats--;
+                                } else {
+                                    v.setSelected(true);
+                                    v.setAlpha(0.5f);
+                                    selectedSeats++;
+                                }
+                            }
+                        });
+                    }
+                }
+            }
         }
     }
     private void disableAllSeats(LinearLayout seatGrid) {
@@ -99,5 +144,14 @@ public class SeatSelectionFragment extends Fragment {
                 }
             }
         }
+    }
+    private void saveBooking(String movieTitle, int numSeats, double totalPrice) {
+        if (getContext() == null) return;
+        SharedPreferences prefs = getContext().getSharedPreferences("BookingPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("movie_name", movieTitle);
+        editor.putInt("num_seats", numSeats);
+        editor.putFloat("total_price", (float) totalPrice);
+        editor.apply();
     }
 }

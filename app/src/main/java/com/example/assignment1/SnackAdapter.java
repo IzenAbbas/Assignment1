@@ -12,10 +12,17 @@ public class SnackAdapter extends BaseAdapter {
     private Context context;
     private List<Snack> snackList;
     private int[] quantities;
+    private OnQuantityChangedListener listener;
+    public interface OnQuantityChangedListener {
+        void onQuantityChanged();
+    }
     public SnackAdapter(Context context, List<Snack> snackList) {
         this.context = context;
         this.snackList = snackList;
         this.quantities = new int[snackList.size()];
+    }
+    public void setOnQuantityChangedListener(OnQuantityChangedListener listener) {
+        this.listener = listener;
     }
     @Override
     public int getCount() {
@@ -56,36 +63,32 @@ public class SnackAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
         Snack snack = snackList.get(position);
-
         holder.imgSnack.setImageResource(snack.getImageResId());
         holder.txtSnackName.setText(snack.getName());
         holder.txtSnackDesc.setText(snack.getDescription());
         holder.txtSnackPrice.setText(String.format("$%.2f", snack.getPrice()));
         holder.txtQty.setText(String.valueOf(quantities[position]));
-
         holder.btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 quantities[position]++;
                 notifyDataSetChanged();
+                if (listener != null) listener.onQuantityChanged();
             }
         });
-
         holder.btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (quantities[position] > 0) {
                     quantities[position]--;
                     notifyDataSetChanged();
+                    if (listener != null) listener.onQuantityChanged();
                 }
             }
         });
-
         return convertView;
     }
-
     private static class ViewHolder {
         ImageView imgSnack;
         TextView txtSnackName;
