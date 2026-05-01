@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new HomeFragment());
                 } else if (id == R.id.nav_my_bookings) {
                     replaceFragment(new MyBookingsFragment());
+                } else if (id == R.id.nav_last_booking) {
+                    viewLastBooking();
                 } else if (id == R.id.nav_logout) {
                     logout();
                 }
@@ -67,6 +69,22 @@ public class MainActivity extends AppCompatActivity {
                     .setReorderingAllowed(true)
                     .replace(R.id.main_fragment_container, new HomeFragment())
                     .commit();
+        }
+    }
+
+    private void viewLastBooking() {
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
+        if (currentFragment instanceof HomeFragment) {
+            ((HomeFragment) currentFragment).viewLastBooking();
+        } else {
+            // If not on HomeFragment, we could either navigate to Home and then show,
+            // or just replace with HomeFragment and pass a flag.
+            // For simplicity, let's just replace and then show.
+            HomeFragment homeFragment = new HomeFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.main_fragment_container, homeFragment)
+                    .commitNow(); // commitNow to ensure it's added immediately
+            homeFragment.viewLastBooking();
         }
     }
 

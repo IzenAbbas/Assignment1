@@ -7,13 +7,13 @@
     android:background="@color/screen_background">
 
     <ImageButton
-        android:id="@+id/btn_my_bookings_back"
+        android:id="@+id/btn_my_bookings_menu"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_arrow_back_circle"
+        android:src="@drawable/ic_drawer_menu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="#FFFFFF" />
@@ -27,9 +27,9 @@
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/btn_my_bookings_back"
-        app:layout_constraintStart_toEndOf="@id/btn_my_bookings_back"
-        app:layout_constraintTop_toTopOf="@id/btn_my_bookings_back" />
+        app:layout_constraintBottom_toBottomOf="@id/btn_my_bookings_menu"
+        app:layout_constraintStart_toEndOf="@id/btn_my_bookings_menu"
+        app:layout_constraintTop_toTopOf="@id/btn_my_bookings_menu" />
 
     <ImageButton
         android:id="@+id/btn_my_bookings_filter"

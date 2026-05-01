@@ -52,7 +52,11 @@ public class MyBookingsFragment extends Fragment {
         adapter = new BookingAdapter(bookingList, this::handleCancelRequest);
         rvBookings.setAdapter(adapter);
 
-        view.findViewById(R.id.btn_my_bookings_back).setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
+        view.findViewById(R.id.btn_my_bookings_menu).setOnClickListener(v -> {
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).openDrawer();
+            }
+        });
 
         String userId = FirebaseAuth.getInstance().getCurrentUser() != null ? FirebaseAuth.getInstance().getCurrentUser().getUid() : null;
         if (userId != null) {

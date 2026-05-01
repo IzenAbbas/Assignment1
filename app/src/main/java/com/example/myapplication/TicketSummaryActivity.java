@@ -52,7 +52,7 @@ public class TicketSummaryActivity extends AppCompatActivity {
         tvSnacksTotal.setText(String.format(Locale.getDefault(), "$%.2f", snacksTotal));
         tvTotal.setText(String.format(Locale.getDefault(), "$%.2f", totalAmount));
 
-        findViewById(R.id.btn_summary_back).setOnClickListener(v -> finish());
+        findViewById(R.id.btn_summary_back).setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
         btnSendTicket.setOnClickListener(v -> saveBookingAndShare());
     }

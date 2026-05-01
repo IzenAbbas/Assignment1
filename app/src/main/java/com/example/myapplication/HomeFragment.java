@@ -49,7 +49,11 @@ public class HomeFragment extends Fragment {
         todayButton.setOnClickListener(v -> viewPager.setCurrentItem(0, true));
         tomorrowButton.setOnClickListener(v -> viewPager.setCurrentItem(1, true));
 
-        view.findViewById(R.id.btn_home_menu).setOnClickListener(this::showPopupMenu);
+        view.findViewById(R.id.btn_home_menu).setOnClickListener(v -> {
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).openDrawer();
+            }
+        });
 
         updateDateSelection(0);
         updateSectionTitle(0);
@@ -78,22 +82,7 @@ public class HomeFragment extends Fragment {
         sectionTitle.setText(position == 0 ? R.string.home_now_showing : R.string.home_coming_soon);
     }
 
-    private void showPopupMenu(View view) {
-        android.widget.PopupMenu popup = new android.widget.PopupMenu(requireContext(), view);
-        popup.getMenu().add("View Last Booking");
-        popup.getMenu().add("My Bookings");
-        popup.setOnMenuItemClickListener(item -> {
-            if (item.getTitle().equals("View Last Booking")) {
-                viewLastBooking();
-            } else if (item.getTitle().equals("My Bookings")) {
-                openMyBookings();
-            }
-            return true;
-        });
-        popup.show();
-    }
-
-    private void viewLastBooking() {
+    public void viewLastBooking() {
         String userId = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser() != null ? com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid() : null;
         if (userId == null) return;
 
