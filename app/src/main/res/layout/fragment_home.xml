@@ -1,64 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/black">
+    android:background="@color/screen_background"
+    android:paddingStart="20dp"
+    android:paddingTop="18dp"
+    android:paddingEnd="20dp"
+    android:paddingBottom="16dp"
+    tools:context=".HomeFragment">
 
     <LinearLayout
+        android:id="@+id/home_brand_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        android:paddingTop="24dp"
-        android:paddingBottom="16dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cine"
-            android:textColor="@color/red_accent"
+            android:textColor="@color/accent_red"
             android:textSize="28sp"
             android:textStyle="bold" />
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="FAST"
-            android:textColor="@color/white"
+            android:textColor="@color/text_primary"
             android:textSize="28sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/btnMenu"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@android:drawable/ic_menu_more"
-            android:contentDescription="Menu"
-            android:padding="4dp" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/btn_home_menu"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_more_vert"
+            android:padding="12dp"
+            app:tint="#FFFFFF"
+            android:contentDescription="Menu" />
     </LinearLayout>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/home_select_date_label"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        app:tabTextColor="#80FFFFFF"
-        app:tabSelectedTextColor="@color/white"
-        app:tabIndicatorColor="@color/red_accent"
-        app:tabIndicatorFullWidth="false"
-        app:tabRippleColor="@android:color/transparent"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp" />
+        android:layout_marginTop="24dp"
+        android:text="@string/home_select_date"
+        android:textColor="@color/text_secondary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_brand_row" />
+
+    <LinearLayout
+        android:id="@+id/home_date_row"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_select_date_label">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/home_today_button"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginEnd="12dp"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:minWidth="112dp"
+            android:text="@string/home_today"
+            android:textAllCaps="false"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/accent_red"
+            app:cornerRadius="18dp"
+            app:icon="@drawable/ic_play_circle"
+            app:iconPadding="8dp"
+            app:iconTint="@color/text_primary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/home_tomorrow_button"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:minWidth="132dp"
+            android:text="@string/home_tomorrow"
+            android:textAllCaps="false"
+            android:textColor="@color/text_secondary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/surface_chip"
+            app:cornerRadius="18dp"
+            app:icon="@drawable/ic_play_circle"
+            app:iconPadding="8dp"
+            app:iconTint="@color/text_secondary" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/home_section_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:text="@string/home_now_showing"
+        android:textColor="@color/text_primary"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_date_row" />
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
+        android:id="@+id/home_view_pager"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_section_title" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

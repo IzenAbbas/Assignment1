@@ -1,58 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="#000000">
 
-
+    <!-- Background rectangles pattern -->
     <ImageView
-        android:id="@+id/imgOnboarding"
+        android:id="@+id/onboarding_bg_pattern"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/movie_imgs"
         android:scaleType="centerCrop"
-        android:alpha="0.6"/>
+        android:src="@drawable/onboarding_rectangles"
+        android:contentDescription="@string/onboarding_bg_desc" />
 
-    <LinearLayout
+    <!-- Dark overlay -->
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical"
-        android:padding="24dp"
-        android:background="@drawable/bg_gradient_overlay">
+        android:layout_height="match_parent"
+        android:background="#000000CC" />
 
+    <!-- Content container -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Title -->
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/onboarding_title"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/onboarding_title"
-            android:textColor="@color/white"
-            android:textSize="28sp"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
             android:textStyle="bold"
-            android:fontFamily="sans-serif-black"
-            android:lineSpacingExtra="4dp"/>
+            android:gravity="center"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/onboarding_subtitle" />
 
+        <!-- Subtitle -->
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/onboarding_subtitle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/onboarding_desc"
-            android:textColor="@color/light_gray"
-            android:textSize="16sp"
-            android:lineSpacingMultiplier="1.2"/>
-
-        <Button
-            android:id="@+id/btnGetStarted"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/rounded_button_background"
-            android:text="@string/get_started"
-            android:textColor="@color/white"
+            android:text="@string/onboarding_subtitle"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:padding="12dp" />
-            
-    </LinearLayout>
+            android:gravity="center"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/onboarding_description" />
 
-</RelativeLayout>
+        <!-- Description -->
+        <TextView
+            android:id="@+id/onboarding_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/onboarding_description"
+            android:textColor="#CCCCCC"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="40dp"
+            android:lineSpacingMultiplier="1.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/onboarding_button" />
+
+        <!-- Get Started Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/onboarding_button"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:text="@string/onboarding_button"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="#FF1B1B"
+            app:cornerRadius="12dp"
+            app:rippleColor="#33FFFFFF"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
