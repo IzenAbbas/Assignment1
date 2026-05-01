@@ -1,95 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_rounded_card"
-    android:padding="16dp"
-    android:layout_marginBottom="16dp">
+    android:layout_marginBottom="16dp"
+    app:cardBackgroundColor="@color/surface_card"
+    app:cardCornerRadius="22dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/surface_chip_border"
+    app:strokeWidth="1dp">
 
-    <!-- Movie Poster -->
-    <ImageView
-        android:id="@+id/imgPoster"
-        android:layout_width="80dp"
-        android:layout_height="110dp"
-        android:scaleType="centerCrop"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-    
-
-    <!-- Play text on the right aligned with Title -->
-    <TextView
-        android:id="@+id/txtPlay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Play"
-        android:textColor="#B3B3B3"
-        android:textSize="14sp"
-        android:layout_alignParentEnd="true"
-    
-
-    <!-- Content Layout (Title, Genre, Buttons) -->
     <LinearLayout
-        android:id="@+id/contentLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/imgPoster"
-        android:layout_toStartOf="@id/txtPlay"
-        android:orientation="vertical"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="8dp">
-    
-        <TextView
-            android:id="@+id/txtTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="4dp" />
+        android:orientation="horizontal"
+        android:padding="14dp">
 
-        <TextView
-            android:id="@+id/txtGenreDuration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#B3B3B3"
-            android:textSize="12sp"
-            android:layout_marginBottom="12dp" />
+        <FrameLayout
+            android:layout_width="98dp"
+            android:layout_height="126dp"
+            android:background="@drawable/bg_movie_poster">
+
+            <ImageView
+                android:id="@+id/movie_poster"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/home_movie_poster_desc"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/ic_launcher_foreground" />
+        </FrameLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnBookSeats"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:text="Book Seats"
-                android:background="@drawable/bg_button_book"
-                android:textColor="@color/white"
-                android:textSize="12sp"
+            <TextView
+                android:id="@+id/movie_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:textAllCaps="false"
-                android:layout_marginEnd="8dp" />
+                tools:text="The Dark Knight" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnTrailer"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:text="Trailer"
-                android:background="@drawable/bg_button_solid_white"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:textAllCaps="false"
-                android:drawableStart="@drawable/ic_play_arrow"
-                android:drawableTint="@color/black"
-                android:drawablePadding="4dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp" />
+            <TextView
+                android:id="@+id/movie_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                tools:text="Action / 152 min" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/movie_trailer_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:minWidth="0dp"
+                    android:text="@string/home_trailer"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp"
+                    app:backgroundTint="@color/surface_chip"
+                    app:cornerRadius="14dp"
+                    app:icon="@drawable/ic_play_circle"
+                    app:iconPadding="6dp"
+                    app:iconTint="@color/text_primary" />
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="1dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/movie_book_button"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:text="@string/home_book_seats"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/accent_red"
+                    app:cornerRadius="14dp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-</RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,58 @@
+[
+  {
+    "title": "The Dark Knight",
+    "genre": "Action",
+    "duration": "152 min",
+    "posterUrl": "https://image.tmdb.org/t/p/original/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=EXeTwQWrcwY",
+    "category": "now_showing"
+  },
+  {
+    "title": "Inception",
+    "genre": "Sci-Fi",
+    "duration": "148 min",
+    "posterUrl": "https://image.tmdb.org/t/p/original/xlaY2zyzMfkhk0HSC5VUwzoZPU1.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=YoHD9XEInc0",
+    "category": "now_showing"
+  },
+  {
+    "title": "Interstellar",
+    "genre": "Sci-Fi",
+    "duration": "169 min",
+    "posterUrl": "https://media.themoviedb.org/t/p/w440_and_h660_face/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=zSWdZVtXT7E",
+    "category": "now_showing"
+  },
+  {
+    "title": "The Shawshank Redemption",
+    "genre": "Drama",
+    "duration": "142 min",
+    "posterUrl": "https://media.themoviedb.org/t/p/w440_and_h660_face/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=PLl99DlL6b4",
+    "category": "now_showing"
+  },
+  {
+    "title": "Dune: Part Two",
+    "genre": "Adventure",
+    "duration": "166 min",
+    "posterUrl": "https://media.themoviedb.org/t/p/w440_and_h660_face/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=Way9Dexny3w",
+    "category": "coming_soon"
+  },
+  {
+    "title": "Deadpool & Wolverine",
+    "genre": "Action",
+    "duration": "128 min",
+    "posterUrl": "https://media.themoviedb.org/t/p/w440_and_h660_face/wIwM0QhjS6BuoB5UrHykZWXOUh6.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=73_1biulkYk",
+    "category": "coming_soon"
+  },
+  {
+    "title": "Avatar 3",
+    "genre": "Adventure",
+    "duration": "189 min",
+    "posterUrl": "https://media.themoviedb.org/t/p/w440_and_h660_face/aabwWZWx6z1aYP4PX2ADvbDKktd.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=Qx9XGNNHC2o",
+    "category": "coming_soon"
+  }
+]
